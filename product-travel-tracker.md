@@ -110,6 +110,7 @@ Dessa forma, o aplicativo manterá o foco principal em registrar viagens, enviar
 | US-15 | Como usuário convidado, quero excluir uma viagem aceita da minha lista de acompanhamento para que eu pare de acompanhar essa viagem. | P1 | - [ ] O usuário deve conseguir remover uma viagem aceita da sua lista de acompanhamento.<br>- [ ] Após a remoção, a viagem não deve mais aparecer para acompanhamento do usuário.<br>- [ ] A remoção deve afetar apenas o usuário convidado, sem excluir a viagem original do viajante.<br>- [ ] O viajante deve continuar tendo acesso à viagem. |
 | US-16 | Como usuário convidado, quero obter as coordenadas de uma viagem aceita para que elas possam ser visualizadas em um mapa no aplicativo. | P0 | - [ ] O aplicativo deve buscar as coordenadas da viagem aceita.<br>- [ ] O sistema deve permitir acesso somente a usuários autorizados.<br>- [ ] As coordenadas devem estar associadas à viagem correta.<br>- [ ] O aplicativo deve exibir os pontos da viagem no mapa. |
 | US-17 | Como usuário, quero obter e atualizar as coordenadas da viagem para que o mapa seja atualizado com novos pontos durante o acompanhamento. | P0 | - [ ] O aplicativo deve buscar novas coordenadas periodicamente ou mediante atualização manual.<br>- [ ] O mapa deve ser atualizado quando novas coordenadas forem recebidas.<br>- [ ] A última localização conhecida da viagem deve ser destacada no mapa.<br>- [ ] O sistema deve tratar situações em que não existam novas coordenadas disponíveis. |
+| US-18 | Como usuário, quero alterar as informações do meu cadastro após estar logado para que meus dados permaneçam atualizados. | P1 | - [ ] O usuário deve conseguir acessar uma tela de edição dos seus dados cadastrais.<br>- [ ] O sistema deve exibir os dados atuais do usuário.<br>- [ ] O usuário deve conseguir alterar os dados permitidos pelo sistema.<br>- [ ] O sistema deve validar os campos obrigatórios antes de salvar.<br>- [ ] Após a alteração, os dados atualizados devem ser exibidos no aplicativo.
 
 ---
 
@@ -138,8 +139,42 @@ Dessa forma, o aplicativo manterá o foco principal em registrar viagens, enviar
 
 | ID | Requisito | Prioridade | História Vinculada |
 |----|-----------|------------|--------------------|
-| RF-01 | O app deve [comportamento]. | P0 | US-01 |
-| RF-02 |  | P1 |  |
+| RF-01 | O app deve permitir que um novo usuário realize cadastro informando seus dados obrigatórios e senha. | P0 | US-01 |
+| RF-02 | O app deve solicitar login por e-mail e senha quando não existir uma sessão válida salva localmente. | P0 | US-02, US-03 |
+| RF-03 | O app deve manter o usuário autenticado quando existir uma sessão válida salva localmente. | P1 | US-03 |
+| RF-04 | O app deve permitir que o usuário informe seu e-mail para solicitar a recuperação de senha. | P0 | US-04 |
+| RF-05 | O app deve enviar um token de recuperação para o e-mail informado pelo usuário. | P0 | US-04 |
+| RF-06 | O app deve permitir que o usuário altere sua senha utilizando um token de recuperação válido. | P0 | US-04 |
+| RF-07 | O app deve permitir que o usuário logado altere as informações do seu cadastro. | P1 | US-18 |
+| RF-08 | O app deve permitir que o usuário logado encerre sua sessão. | P1 | US-02 |
+| RF-09 | O app deve exibir as viagens cadastradas pelo usuário logado. | P0 | US-05 |
+| RF-10 | O app deve permitir que o usuário logado cadastre uma nova viagem. | P0 | US-05 |
+| RF-11 | O app deve permitir que o usuário logado altere as informações de uma viagem cadastrada. | P1 | US-06 |
+| RF-12 | O app deve permitir que o usuário logado exclua uma viagem cadastrada e não realizada. | P1 | US-07 |
+| RF-13 | O app deve permitir que o usuário logado ative uma viagem cadastrada. | P0 | US-08 |
+| RF-14 | O app deve permitir que o usuário logado inative ou finalize uma viagem ativa. | P0 | US-10 |
+| RF-15 | O app deve permitir que o usuário logado cancele uma viagem. | P1 | US-11 |
+| RF-16 | O app deve enviar as coordenadas do dispositivo para o endpoint enquanto existir uma viagem ativa. | P0 | US-09 |
+| RF-17 | O app deve associar cada coordenada enviada ao usuário logado e à viagem ativa. | P0 | US-09 |
+| RF-18 | O app deve impedir o envio de coordenadas quando não houver usuário autenticado. | P0 | US-09 |
+| RF-19 | O app deve impedir o envio de coordenadas quando não houver viagem ativa. | P0 | US-09 |
+| RF-20 | O app deve permitir que o viajante envie convite para outro usuário acompanhar uma viagem. | P0 | US-12 |
+| RF-21 | O app deve exibir os convites de acompanhamento recebidos pelo usuário logado. | P0 | US-13, US-14 |
+| RF-22 | O app deve permitir que o usuário aceite um convite de acompanhamento de viagem. | P0 | US-13 |
+| RF-23 | O app deve permitir que o usuário rejeite um convite de acompanhamento de viagem. | P0 | US-14 |
+| RF-24 | O app deve permitir que o usuário visualize as viagens com convite aceito. | P0 | US-15, US-16 |
+| RF-25 | O app deve permitir que o usuário remova uma viagem aceita da sua lista de acompanhamento. | P1 | US-15 |
+| RF-26 | O app deve exibir, em uma mesma tela, as viagens criadas pelo usuário e as viagens acompanhadas, separadas por opções distintas. | P0 | US-05, US-16 |
+| RF-27 | O app deve permitir filtrar as viagens criadas pelo usuário por status. | P1 | US-05 |
+| RF-28 | O app deve permitir filtrar as viagens acompanhadas por status, incluindo viagens aceitas e convites ainda não aceitos. | P1 | US-13, US-14, US-16 |
+| RF-29 | O app deve permitir visualizar as coordenadas de uma viagem acompanhada em um mapa. | P0 | US-16 |
+| RF-30 | O app deve exibir no mapa os pontos registrados durante a viagem acompanhada. | P0 | US-16 |
+| RF-31 | O app deve destacar no mapa a última localização conhecida da viagem acompanhada. | P0 | US-17 |
+| RF-32 | O app deve permitir atualizar as coordenadas visualizadas no mapa. | P0 | US-17 |
+| RF-33 | O app deve restringir a visualização das coordenadas apenas aos usuários autorizados a acompanhar a viagem. | P0 | US-13, US-16 |
+| RF-34 | O app deve exibir mensagens de erro ou alerta quando uma operação não puder ser concluída. | P1 | US-01, US-02, US-05, US-09, US-13 |
+| RF-35 | O app deve exibir o status atual de cada viagem, como cadastrada, ativa, finalizada, cancelada ou equivalente. | P0 | US-05, US-08, US-10, US-11 |
+| RF-36 | O app deve exibir o status atual de cada convite, como pendente, aceito ou rejeitado. | P0 | US-12, US-13, US-14 |
 
 ---
 
