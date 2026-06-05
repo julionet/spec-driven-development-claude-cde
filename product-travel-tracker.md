@@ -36,7 +36,7 @@ Dessa forma, o produto representa uma oportunidade de criar uma solução útil 
 
 | # | Objetivo | Métrica de Sucesso | Meta |
 |---|----------|--------------------|------|
-| 1 | Permitir que o viajante registre uma viagem no aplicativo | Viagem criada com dados básicos, como título, data de início, tipo de transporte e status | |
+| 1 | Permitir que o viajante registre uma viagem no aplicativo | Viagem criada com dados básicos, como título, data de início, tipo de transporte e status | O usuário deve conseguir criar uma nova viagem com sucesso |
 | 2 | Permitir que a localização do dispositivo seja capturada e enviada para um endpoint durante a viagem | Coordenadas de latitude, longitude, data e hora enviadas corretamente para a API | O aplicativo deve enviar pontos de localização enquanto a viagem estiver ativa |
 | 3 | Permitir que o viajante convide outras pessoas para acompanhar uma viagem | Convite criado e associado à viagem e ao usuário convidado | O usuário deve conseguir enviar convites para rastreamento de uma viagem |
 | 4 | Permitir que o usuário convidado aceite ou rejeite o convite de rastreamento | Status do convite atualizado para aceito ou rejeitado | O convidado deve conseguir responder ao convite dentro do aplicativo |
@@ -114,20 +114,54 @@ Dessa forma, o aplicativo manterá o foco principal em registrar viagens, enviar
 
 ## 4. Jornadas do Usuário
 
-### 4.1 Jornada Principal — [Nome da Jornada]
+### 4.1 Jornada Principal — Acesso ao Aplicativo
+
 <!-- Narrativa passo a passo do fluxo principal na perspectiva do usuário.
      Sem detalhes de implementação técnica aqui. -->
 
-1. O usuário abre o app e vê [tela].
-2. O usuário toca em [elemento] para [ação].
-3. O sistema responde com [feedback].
-4. O usuário conclui [objetivo].
+1. O usuário abre o aplicativo.
+2. O aplicativo apresenta a tela de Splash enquanto prepara a experiência inicial.
+3. O aplicativo realiza o carregamento inicial e verifica se existe uma sessão válida.
+4. Caso não exista uma sessão válida, o aplicativo exibe a tela de login.
+5. O usuário informa e-mail e senha.
+6. O usuário toca no botão **Entrar**.
+7. O aplicativo valida as informações informadas pelo usuário.
+8. Caso os dados estejam corretos, o aplicativo autentica o usuário com sucesso.
+9. O aplicativo mantém as informações necessárias para que o usuário permaneça autenticado em acessos futuros.
+10. O aplicativo apresenta a tela inicial.
+11. Na tela inicial, o usuário visualiza as opções principais do aplicativo, separadas entre **Minhas Viagens** e **Viagens Acompanhadas**.
 
-### 4.2 Jornadas Alternativas
-<!-- Variações, casos extremos ou caminhos secundários. -->
+#### Resultado Esperado
 
-#### 4.2.1 [Nome da Jornada Alternativa]
-1. 
+Ao final desta jornada, o usuário deve estar autenticado e visualizar a tela principal do aplicativo, podendo acessar suas viagens, viagens acompanhadas, convites e demais funcionalidades disponíveis.
+
+---
+
+### 4.1.1 Fluxos Alternativos
+
+#### Usuário já autenticado
+
+1. O usuário abre o aplicativo.
+2. O aplicativo apresenta a tela de Splash.
+3. O aplicativo verifica que já existe uma sessão válida.
+4. O aplicativo realiza o carregamento inicial das informações do usuário.
+5. O aplicativo apresenta diretamente a tela inicial, sem solicitar login novamente.
+
+#### Login inválido
+
+1. O usuário informa e-mail e senha.
+2. O usuário toca no botão **Entrar**.
+3. O aplicativo identifica que os dados informados são inválidos.
+4. O aplicativo exibe uma mensagem informando que o e-mail ou senha estão incorretos.
+5. O usuário pode corrigir os dados e tentar novamente.
+
+#### Falha de conexão no login
+
+1. O usuário informa e-mail e senha.
+2. O usuário toca no botão **Entrar**.
+3. O aplicativo não consegue concluir a autenticação por falta de conexão ou falha de comunicação.
+4. O aplicativo exibe uma mensagem amigável informando que não foi possível conectar ao servidor.
+5. O usuário pode tentar novamente quando houver conexão disponível.
 
 ---
 
