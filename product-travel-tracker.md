@@ -184,21 +184,89 @@ Dessa forma, o aplicativo manterá o foco principal em registrar viagens, enviar
 
 | Categoria | Requisito | Limiar de Aceite |
 |-----------|-----------|------------------|
-| Desempenho | App inicia em até [X]s em dispositivo intermediário | ≤ Xs (cold start) |
-| Disponibilidade | Funcionalidade opera totalmente offline | 100% do fluxo principal offline |
-| Acessibilidade | Atende às diretrizes de acessibilidade da plataforma-alvo | WCAG 2.1 AA / equivalente da plataforma |
-| Localização | Suporta [idiomas] | [lista] |
+| Plataforma | O app deve ser desenvolvido exclusivamente para Android nesta versão. | O produto deve ser disponibilizado apenas para dispositivos Android. |
+| Desempenho | O app deve iniciar em tempo aceitável em um dispositivo Android intermediário. | Cold start em até 3 segundos em condições normais. |
+| Desempenho | O app deve carregar a tela inicial com as viagens do usuário e viagens acompanhadas em tempo aceitável. | Dados exibidos em até 3 segundos quando houver informações locais disponíveis. |
+| Armazenamento Local | Ao carregar o app, as viagens do usuário logado devem ser consultadas na API e salvas na base local do aplicativo. | As viagens retornadas pela API devem ficar disponíveis localmente após o carregamento com sucesso. |
+| Armazenamento Local | Ao carregar o app, as viagens acompanhadas pelo usuário devem ser consultadas na API e salvas na base local do aplicativo. | As viagens acompanhadas retornadas pela API devem ficar disponíveis localmente após o carregamento com sucesso. |
+| Armazenamento Local | As coordenadas capturadas do dispositivo durante uma viagem ativa devem ser salvas na base local do aplicativo. | Cada coordenada capturada deve conter, no mínimo, latitude, longitude, data, hora e vínculo com a viagem ativa. |
+| Captura de Localização | O app deve capturar e salvar localmente as coordenadas do dispositivo a cada 10 segundos enquanto houver uma viagem ativa. | Uma nova coordenada deve ser registrada localmente a cada 10 segundos, desde que o app possua permissão de localização e exista viagem ativa. |
+| Sincronização | O app deve tentar enviar as coordenadas salvas localmente para o endpoint da API a cada 1 minuto. | A tentativa de envio deve ocorrer a cada 1 minuto enquanto houver coordenadas pendentes e conexão com a internet. |
+| Sincronização | O app deve enviar coordenadas para o endpoint somente quando houver conexão com a internet. | Caso não exista conexão, as coordenadas devem permanecer salvas localmente para envio posterior. |
+| Sincronização | Após o envio bem-sucedido das coordenadas para a API, o app deve remover da base local as coordenadas já sincronizadas. | Coordenadas enviadas com sucesso não devem permanecer como pendentes na base local. |
+| Sincronização | Caso o envio das coordenadas falhe, o app deve manter os dados na base local para nova tentativa posterior. | Nenhuma coordenada deve ser excluída localmente quando o envio para a API falhar. |
+| Disponibilidade | Algumas funcionalidades devem estar disponíveis mesmo sem conexão com a internet. | O usuário deve conseguir visualizar dados já carregados anteriormente, como minhas viagens, viagens acompanhadas e coordenadas salvas localmente. |
+| Disponibilidade | O app deve informar claramente quando não houver conexão com a internet. | Mensagem exibida sempre que uma operação depender de conexão e não puder ser concluída. |
+| Conectividade | As informações principais do aplicativo devem ser salvas e consultadas por meio de endpoints de uma API. | Operações como login, cadastro, viagens, convites e sincronização devem comunicar sucesso ou falha ao usuário. |
+| Conectividade | O app deve tratar falhas de comunicação com a API de forma clara. | Em caso de erro, timeout ou indisponibilidade, o usuário deve receber mensagem compreensível. |
+| Permissões | O app deve solicitar as permissões necessárias para seu funcionamento apenas quando forem necessárias. | Permissões de localização devem ser solicitadas de forma contextualizada. |
+| Permissões | O app deve explicar ao usuário por que precisa acessar a localização do dispositivo. | O app deve informar que a localização será usada para registrar e compartilhar coordenadas durante viagens ativas. |
+| Segurança | O app deve proteger o acesso às funcionalidades por autenticação. | Funcionalidades de viagem, convites e localização devem exigir usuário autenticado. |
+| Segurança | O app não deve permitir acesso a viagens ou coordenadas por usuários não autorizados. | Apenas o viajante e convidados autorizados devem acessar dados da viagem. |
+| Privacidade | O app deve compartilhar localização somente quando houver uma viagem ativa. | Nenhuma coordenada deve ser capturada ou enviada sem viagem ativa e usuário logado. |
+| Privacidade | O usuário deve conseguir interromper o compartilhamento de localização. | Ao inativar, finalizar ou cancelar a viagem, a captura e o envio de coordenadas devem parar. |
+| Usabilidade | O app deve apresentar mensagens claras para erros, alertas e confirmações. | Todas as ações críticas devem apresentar retorno visual compreensível ao usuário. |
+| Usabilidade | O app deve solicitar confirmação antes de ações irreversíveis ou sensíveis. | Excluir viagem, cancelar viagem ou remover acompanhamento deve exigir confirmação. |
+| Acessibilidade | O app deve seguir boas práticas de acessibilidade para Android. | Elementos interativos devem possuir descrição acessível e tamanho adequado para toque. |
+| Acessibilidade | O app deve permitir leitura adequada por tecnologias assistivas do Android. | Campos, botões e mensagens principais devem ser compatíveis com leitores de tela. |
+| Localização | O app deve utilizar idioma português do Brasil na primeira versão. | Todos os textos da interface devem estar em pt-BR. |
+| Localização | Datas, horários e formatos numéricos devem seguir o padrão brasileiro. | Exibir datas, horários e números em formato compatível com pt-BR. |
+| Compatibilidade | O app deve funcionar adequadamente em dispositivos Android modernos. | Deve funcionar na versão mínima de Android definida pelo projeto. |
+| Consistência Visual | O app deve manter uma experiência visual consistente entre telas. | Cores, botões, textos, ícones e estados devem seguir o padrão visual definido para o produto. |
+| Feedback ao Usuário | O app deve indicar carregamento em operações que dependem de comunicação com a API. | Operações como login, cadastro, envio de convite, carregamento de viagens e atualização de mapa devem exibir estado de carregamento. |
+| Integridade dos Dados | O app deve evitar exibir dados desatualizados como se fossem atuais. | Quando os dados forem carregados localmente ou estiverem sem atualização recente, o app deve indicar essa condição quando relevante. |
+| Consumo de Bateria | O app deve minimizar impacto perceptível no consumo de bateria durante viagens. | A captura de localização a cada 10 segundos deve ser executada sem consumo excessivo de bateria. |
+| Recuperação de Erros | O app deve permitir que o usuário tente novamente operações que falharem. | Erros de rede ou API devem permitir nova tentativa quando aplicável. |
 
 ---
+
+### Observações de Produto
+
+O aplicativo será desenvolvido inicialmente apenas para Android. Nesta versão, o produto deverá priorizar o funcionamento confiável do rastreamento de viagens, mesmo em situações de instabilidade de conexão.
+
+Durante uma viagem ativa, as coordenadas do dispositivo deverão ser capturadas e salvas na base local do aplicativo a cada 10 segundos. O envio dessas coordenadas para a API deverá ocorrer a cada 1 minuto, desde que exista conexão com a internet. Caso o dispositivo esteja sem conexão ou ocorra falha no envio, as coordenadas deverão permanecer armazenadas localmente para uma nova tentativa posterior.
+
+Após o envio bem-sucedido das coordenadas para o endpoint da API, os registros enviados deverão ser removidos da base local do aplicativo, evitando duplicidade de envio e acúmulo desnecessário de dados locais.
+
+Ao carregar o aplicativo, as viagens cadastradas pelo usuário e as viagens acompanhadas deverão ser consultadas nos endpoints da API e salvas localmente. Isso permitirá que o usuário visualize informações já carregadas anteriormente mesmo em momentos sem conexão com a internet.
+
+O compartilhamento de localização deverá ocorrer somente quando o usuário estiver autenticado e possuir uma viagem ativa. Ao inativar, finalizar ou cancelar uma viagem, o aplicativo deverá interromper a captura e o envio das coordenadas.
 
 ## 7. UX e Design
 
 ### 7.1 Princípios de Design
+
 <!-- De 3 a 5 princípios norteadores das decisões de UX neste produto. -->
 
-1. 
-2. 
-3. 
+1. **Identidade visual inspirada em viagens**  
+   A interface deve utilizar uma paleta de cores alinhada ao tema de viagens, aventura, estrada, mapas e deslocamento, transmitindo sensação de movimento, segurança e exploração.
+
+2. **Interface simples, clara e objetiva**  
+   O aplicativo deve priorizar telas fáceis de entender, com informações diretas e ações bem visíveis, evitando excesso de elementos visuais que dificultem o uso durante uma viagem.
+
+3. **Componentes com aparência amigável e moderna**  
+   Botões, cards, caixas de texto, filtros e demais componentes visuais devem utilizar cantos arredondados para criar uma experiência visual mais leve, moderna e agradável.
+
+4. **Organização clara entre minhas viagens e viagens acompanhadas**  
+   A tela principal deve utilizar navegação por abas, como Tab Pages, para separar as viagens criadas pelo usuário das viagens que ele acompanha como convidado.
+
+5. **Prioridade para segurança e controle do usuário**  
+   A interface deve deixar claro quando uma viagem está ativa, quando a localização está sendo compartilhada e quando o usuário pode interromper o rastreamento.
+
+6. **Feedback visual para ações importantes**  
+   O aplicativo deve apresentar retornos visuais claros para ações como ativar viagem, cancelar viagem, aceitar convite, rejeitar convite, atualizar mapa e enviar coordenadas.
+
+7. **Mapa como elemento central da experiência**  
+   A visualização em mapa deve ser tratada como uma funcionalidade principal do produto, destacando os pontos da viagem, a última localização conhecida e o status do acompanhamento.
+
+8. **Consistência visual em todas as telas**  
+   Cores, tipografia, botões, ícones, cards, mensagens e estados visuais devem seguir um mesmo padrão para tornar o aplicativo previsível e fácil de usar.
+
+9. **Acessibilidade e legibilidade**  
+   Textos, botões e ícones devem ter tamanho adequado, bom contraste e descrições claras, permitindo o uso confortável em diferentes condições de luminosidade.
+
+10. **Experiência adequada ao uso em movimento**  
+   O aplicativo deve considerar que o usuário pode estar em deslocamento, portanto as principais ações devem exigir poucos toques e ser fáceis de identificar rapidamente.
 
 ### 7.2 Telas / Views Principais
 <!-- Liste as telas principais; anexe wireframes ou links do Figma. Sem código de layout. -->
