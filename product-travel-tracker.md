@@ -505,11 +505,100 @@ Essas ações devem:
 
 | Contexto | Texto | Tom |
 |----------|-------|-----|
-| Título do onboarding |  | Acolhedor |
-| Estado vazio — sem itens |  | Útil |
-| Erro genérico |  | Amigável, não técnico |
+| Título do onboarding | Acompanhe suas viagens com mais segurança | Acolhedor |
+| Subtítulo do onboarding | Compartilhe sua localização durante uma viagem e permita que pessoas convidadas acompanhem seu trajeto pelo mapa. | Claro |
+| Botão principal do onboarding | Começar agora | Direto |
+| Tela de login — título | Entrar no aplicativo | Direto |
+| Tela de login — subtítulo | Acesse sua conta para gerenciar suas viagens e acompanhar trajetos compartilhados com você. | Informativo |
+| Campo de e-mail | E-mail | Neutro |
+| Campo de senha | Senha | Neutro |
+| Botão de login | Entrar | Direto |
+| Link de cadastro | Criar minha conta | Convidativo |
+| Link de recuperação de senha | Esqueci minha senha | Útil |
+| Erro de login inválido | E-mail ou senha inválidos. Verifique os dados e tente novamente. | Amigável, não técnico |
+| Erro de campo obrigatório | Este campo é obrigatório. | Direto |
+| Erro de e-mail inválido | Informe um e-mail válido. | Orientativo |
+| Cadastro — título | Criar conta | Direto |
+| Cadastro — subtítulo | Cadastre-se para registrar suas viagens e acompanhar viagens compartilhadas com você. | Informativo |
+| Cadastro — sucesso | Conta criada com sucesso. Agora você já pode acessar o aplicativo. | Positivo |
+| Recuperação de senha — título | Recuperar senha | Direto |
+| Recuperação de senha — instrução | Informe seu e-mail cadastrado para receber um token de recuperação. | Orientativo |
+| Recuperação de senha — sucesso | Enviamos um token de recuperação para o e-mail informado. | Informativo |
+| Alteração de senha — título | Criar nova senha | Direto |
+| Alteração de senha — sucesso | Senha alterada com sucesso. Use sua nova senha para acessar o aplicativo. | Positivo |
+| Erro de token inválido | Token inválido ou expirado. Solicite um novo token e tente novamente. | Orientativo |
+| Tela principal — aba Minhas Viagens | Minhas viagens | Direto |
+| Tela principal — aba Viagens Acompanhadas | Viagens acompanhadas | Direto |
+| Estado vazio — sem minhas viagens | Você ainda não cadastrou nenhuma viagem. Crie uma nova viagem para começar. | Útil |
+| Estado vazio — sem viagens acompanhadas | Você ainda não acompanha nenhuma viagem. Quando aceitar um convite, ela aparecerá aqui. | Útil |
+| Estado vazio — sem convites | Você não possui convites pendentes no momento. | Neutro |
+| Botão nova viagem | Nova viagem | Direto |
+| Cadastro de viagem — título | Nova viagem | Direto |
+| Edição de viagem — título | Editar viagem | Direto |
+| Cadastro de viagem — sucesso | Viagem cadastrada com sucesso. | Positivo |
+| Edição de viagem — sucesso | Viagem atualizada com sucesso. | Positivo |
+| Exclusão de viagem — confirmação | Deseja excluir esta viagem? Essa ação não poderá ser desfeita. | Cauteloso |
+| Exclusão de viagem — sucesso | Viagem excluída com sucesso. | Positivo |
+| Cancelamento de viagem — confirmação | Deseja cancelar esta viagem? Após o cancelamento, ela não poderá ser acompanhada. | Cauteloso |
+| Cancelamento de viagem — sucesso | Viagem cancelada com sucesso. | Positivo |
+| Ativar viagem — confirmação | Deseja ativar esta viagem e iniciar o compartilhamento da sua localização? | Cauteloso |
+| Ativar viagem — sucesso | Viagem ativada. Sua localização será registrada durante o trajeto. | Informativo |
+| Finalizar viagem — confirmação | Deseja finalizar esta viagem e parar o compartilhamento da localização? | Cauteloso |
+| Finalizar viagem — sucesso | Viagem finalizada. O compartilhamento da localização foi interrompido. | Informativo |
+| Status viagem cadastrada | Cadastrada | Neutro |
+| Status viagem ativa | Ativa | Informativo |
+| Status viagem finalizada | Finalizada | Neutro |
+| Status viagem cancelada | Cancelada | Neutro |
+| Convite — título | Convite de acompanhamento | Direto |
+| Convite — recebido | Você recebeu um convite para acompanhar uma viagem. | Informativo |
+| Convite — aceitar | Aceitar convite | Direto |
+| Convite — rejeitar | Rejeitar convite | Direto |
+| Convite — aceito | Convite aceito. Agora você pode acompanhar a viagem no mapa. | Positivo |
+| Convite — rejeitado | Convite rejeitado. Você não acompanhará esta viagem. | Neutro |
+| Remover acompanhamento — confirmação | Deseja remover esta viagem da sua lista de acompanhamento? | Cauteloso |
+| Remover acompanhamento — sucesso | Viagem removida da sua lista de acompanhamento. | Neutro |
+| Mapa — título | Mapa da viagem | Direto |
+| Mapa — última localização | Última localização registrada | Informativo |
+| Mapa — atualizar | Atualizar mapa | Direto |
+| Mapa — sem coordenadas | Ainda não há coordenadas registradas para esta viagem. | Útil |
+| Mapa — atualização sem novos pontos | O mapa já está atualizado. Não há novos pontos no momento. | Neutro |
+| Sincronização pendente | Existem coordenadas aguardando envio. Elas serão sincronizadas quando houver internet. | Informativo |
+| Sincronização concluída | Coordenadas sincronizadas com sucesso. | Positivo |
+| Sem conexão | Sem conexão com a internet. Alguns dados podem estar desatualizados. | Amigável, não técnico |
+| Erro de conexão | Não foi possível conectar ao servidor. Verifique sua internet e tente novamente. | Amigável, não técnico |
+| Erro genérico | Não foi possível concluir a operação. Tente novamente em alguns instantes. | Amigável, não técnico |
+| Erro ao carregar viagens | Não foi possível carregar suas viagens. Tente novamente. | Útil |
+| Erro ao carregar convites | Não foi possível carregar seus convites. Tente novamente. | Útil |
+| Erro ao carregar mapa | Não foi possível carregar o mapa da viagem. Tente novamente. | Útil |
+| Erro de permissão de localização | Para registrar sua viagem, permita o acesso à localização do dispositivo. | Orientativo |
+| Permissão de localização — explicação | Usamos sua localização apenas durante viagens ativas para registrar os pontos do trajeto. | Transparente |
+| Localização desativada | Ative a localização do dispositivo para registrar os pontos da viagem. | Orientativo |
+| Logout — confirmação | Deseja sair da sua conta? | Neutro |
+| Logout — sucesso | Você saiu da sua conta. | Neutro |
+| Perfil — título | Meu perfil | Direto |
+| Perfil — salvar | Salvar alterações | Direto |
+| Perfil — sucesso | Seus dados foram atualizados com sucesso. | Positivo |
+| Botão cancelar | Cancelar | Direto |
+| Botão confirmar | Confirmar | Direto |
+| Botão tentar novamente | Tentar novamente | Direto |
+| Botão voltar | Voltar | Direto |
 
 ---
+
+### Diretrizes de Tom de Voz
+
+O aplicativo deve utilizar uma comunicação clara, objetiva e amigável. As mensagens devem evitar termos técnicos sempre que possível e orientar o usuário sobre o que aconteceu e qual ação ele pode tomar.
+
+#### Recomendações
+
+- Usar frases curtas e diretas.
+- Evitar termos técnicos como `endpoint`, `token expirado pelo servidor`, `erro HTTP` ou `falha de sincronização`.
+- Explicar situações de erro de forma simples.
+- Confirmar ações importantes com mensagens claras.
+- Informar quando a localização estiver sendo compartilhada.
+- Reforçar que a localização será usada apenas durante viagens ativas.
+- Usar tom calmo em mensagens de erro.
+- Usar tom cauteloso em ações sensíveis, como excluir, cancelar ou finalizar viagens.
 
 ## 9. Analytics e Acompanhamento de Sucesso
 
@@ -517,15 +606,76 @@ Essas ações devem:
 
 | Evento | Gatilho | Por que importa |
 |--------|---------|-----------------|
-| app_aberto | Usuário abre o app | Base de DAU |
-| [feature]_concluida | Usuário finaliza o fluxo principal | Conversão principal |
-
-### 9.1 KPIs
-| KPI | Linha de base | Meta após [N semanas] |
-|-----|---------------|-----------------------|
-|     |               |                       |
+| app_aberto | Usuário abre o app | Mede uso geral do aplicativo e serve como base para usuários ativos. |
+| usuario_cadastrado | Usuário conclui o cadastro com sucesso | Mede conversão de novos usuários. |
+| login_realizado | Usuário realiza login com sucesso | Mede acesso autenticado ao aplicativo. |
+| login_falhou | Tentativa de login não é concluída | Ajuda a identificar problemas de acesso, credenciais ou experiência de login. |
+| recuperacao_senha_solicitada | Usuário solicita recuperação de senha por e-mail | Mede necessidade de recuperação de conta. |
+| senha_alterada | Usuário altera a senha com sucesso usando token | Mede conclusão do fluxo de recuperação de senha. |
+| viagem_criada | Usuário cadastra uma nova viagem | Mede adoção da funcionalidade principal pelo viajante. |
+| viagem_alterada | Usuário altera dados de uma viagem cadastrada | Mede uso de manutenção e gerenciamento das viagens. |
+| viagem_excluida | Usuário exclui uma viagem cadastrada | Ajuda a entender desistências ou cadastros incorretos. |
+| viagem_ativada | Usuário ativa uma viagem | Mede início real do fluxo principal de rastreamento. |
+| viagem_finalizada | Usuário inativa ou finaliza uma viagem ativa | Mede conclusão do ciclo de uma viagem acompanhada. |
+| viagem_cancelada | Usuário cancela uma viagem | Ajuda a entender interrupções antes ou durante o acompanhamento. |
+| coordenada_salva_localmente | App salva coordenada na base local durante viagem ativa | Mede se a captura local de localização está funcionando. |
+| coordenadas_enviadas_api | App envia coordenadas com sucesso para a API | Mede sucesso da sincronização de localização. |
+| envio_coordenadas_falhou | App tenta enviar coordenadas e não consegue | Ajuda a identificar falhas de conexão, API ou sincronização. |
+| coordenadas_pendentes_sincronizacao | Existem coordenadas locais aguardando envio | Ajuda a acompanhar o acúmulo de dados pendentes. |
+| convite_enviado | Viajante envia convite para acompanhamento de viagem | Mede compartilhamento da viagem com outros usuários. |
+| convite_aceito | Usuário convidado aceita acompanhar uma viagem | Mede conversão de convite em acompanhamento real. |
+| convite_rejeitado | Usuário convidado rejeita acompanhar uma viagem | Ajuda a entender rejeição de convites. |
+| viagem_acompanhada_aberta | Usuário abre uma viagem acompanhada | Mede interesse e uso da funcionalidade de acompanhamento. |
+| mapa_aberto | Usuário abre o mapa de uma viagem | Mede uso da visualização principal de acompanhamento. |
+| mapa_atualizado | Usuário atualiza manualmente as coordenadas no mapa | Mede necessidade de atualização manual e uso do mapa. |
+| filtro_minhas_viagens_usado | Usuário filtra suas viagens por status | Mede uso de organização e consulta das viagens. |
+| filtro_viagens_acompanhadas_usado | Usuário filtra viagens acompanhadas ou convites | Mede uso de organização na área de acompanhamento. |
+| perfil_atualizado | Usuário altera dados do seu cadastro | Mede uso da manutenção de perfil. |
+| logout_realizado | Usuário encerra a sessão | Mede encerramento voluntário da sessão. |
+| erro_generico_exibido | App exibe mensagem de erro genérico | Ajuda a monitorar problemas recorrentes na experiência. |
+| app_sem_conexao_exibido | App identifica ausência de internet | Ajuda a entender impacto de uso offline ou instabilidade de conexão. |
+| permissao_localizacao_solicitada | App solicita permissão de localização | Mede exposição ao pedido de permissão essencial. |
+| permissao_localizacao_concedida | Usuário concede permissão de localização | Mede viabilidade do rastreamento. |
+| permissao_localizacao_negada | Usuário nega permissão de localização | Ajuda a identificar barreiras para uso da funcionalidade principal. |
 
 ---
+
+### 9.1 KPIs
+
+| KPI | Linha de base | Meta após 8 semanas |
+|-----|---------------|---------------------|
+| Usuários cadastrados | 0 usuários | Alcançar pelo menos 50 usuários cadastrados. |
+| Taxa de conclusão de cadastro | Sem linha de base inicial | Pelo menos 80% dos usuários que iniciarem o cadastro devem concluí-lo. |
+| Taxa de login bem-sucedido | Sem linha de base inicial | Pelo menos 90% das tentativas de login devem ser concluídas com sucesso. |
+| Viagens criadas | 0 viagens | Alcançar pelo menos 30 viagens cadastradas. |
+| Viagens ativadas | 0 viagens ativas | Pelo menos 60% das viagens cadastradas devem ser ativadas. |
+| Viagens finalizadas corretamente | 0 viagens finalizadas | Pelo menos 70% das viagens ativadas devem ser finalizadas ou inativadas pelo usuário. |
+| Convites enviados | 0 convites | Pelo menos 20 convites enviados para acompanhamento. |
+| Taxa de aceite de convites | Sem linha de base inicial | Pelo menos 50% dos convites enviados devem ser aceitos. |
+| Viagens acompanhadas com mapa aberto | 0 viagens acompanhadas | Pelo menos 70% das viagens aceitas devem ter o mapa aberto ao menos uma vez. |
+| Sucesso no envio de coordenadas | Sem linha de base inicial | Pelo menos 95% das tentativas de envio devem ser concluídas com sucesso quando houver internet. |
+| Coordenadas pendentes por mais de 24 horas | Sem linha de base inicial | Menos de 5% das coordenadas devem permanecer pendentes por mais de 24 horas. |
+| Permissão de localização concedida | Sem linha de base inicial | Pelo menos 80% dos usuários que ativarem uma viagem devem conceder permissão de localização. |
+| Erros críticos no fluxo principal | Sem linha de base inicial | Menos de 3% das sessões devem apresentar erro crítico em login, ativação de viagem ou envio de coordenadas. |
+| Retenção de usuários | Sem linha de base inicial | Pelo menos 30% dos usuários cadastrados devem retornar ao app em até 7 dias. |
+
+---
+
+### Observações de Produto
+
+Os eventos de analytics devem ser usados para acompanhar se o aplicativo está cumprindo seu objetivo principal: permitir que um viajante registre uma viagem, compartilhe suas coordenadas e permita que convidados acompanhem o trajeto em um mapa.
+
+Os KPIs mais importantes para validar o sucesso do produto nesta primeira versão são:
+
+- Quantidade de viagens criadas.
+- Quantidade de viagens ativadas.
+- Taxa de sucesso no envio das coordenadas.
+- Quantidade de convites enviados.
+- Taxa de aceite dos convites.
+- Uso do mapa pelos convidados.
+- Baixa quantidade de erros no fluxo principal.
+
+Como o produto ainda não possui linha de base, os primeiros indicadores deverão servir também para aprendizado e ajuste das metas futuras. Após as primeiras semanas de uso, as metas poderão ser revisadas com base no comportamento real dos usuários.
 
 ## 10. Monetização e Modelo de Negócio
 <!-- Precificação, posicionamento de paywall, camadas gratuita vs. paga — decisões de produto apenas. -->
