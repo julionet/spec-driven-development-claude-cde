@@ -276,10 +276,226 @@ O compartilhamento de localização deverá ocorrer somente quando o usuário es
 | Home |           |                        |
 
 ### 7.3 Modelo de Navegação
+
 <!-- Descreva como os usuários se movem entre as áreas principais: abas, pilha, drawer, modal, etc. -->
 
+O aplicativo deve utilizar um modelo de navegação simples, organizado e compatível com a experiência esperada em aplicativos Android. A navegação principal deve priorizar o acesso rápido às viagens do usuário, viagens acompanhadas, convites e configurações da conta.
+
+#### Navegação Principal
+
+A tela principal do aplicativo deve utilizar navegação por abas para separar os dois principais contextos de uso:
+
+1. **Minhas Viagens**  
+   Exibe as viagens criadas pelo usuário logado, permitindo visualizar, cadastrar, alterar, ativar, inativar, cancelar, excluir e acessar detalhes de uma viagem.
+
+2. **Viagens Acompanhadas**  
+   Exibe as viagens que o usuário foi convidado a acompanhar, incluindo viagens aceitas, convites pendentes e viagens acompanhadas anteriormente.
+
+#### Estrutura Geral de Navegação
+
+| Área | Tipo de Navegação | Descrição |
+|------|-------------------|-----------|
+| Login | Tela inicial condicional | Exibida quando não existir sessão válida salva localmente. |
+| Cadastro de Usuário | Pilha de navegação | Acessada a partir da tela de login para criação de nova conta. |
+| Recuperação de Senha | Pilha de navegação | Acessada a partir da tela de login para solicitação e validação de token. |
+| Tela Principal | Abas / Tab Pages | Exibe “Minhas Viagens” e “Viagens Acompanhadas”. |
+| Detalhe da Viagem | Pilha de navegação | Acessada ao selecionar uma viagem na listagem. |
+| Cadastro/Edição de Viagem | Tela de formulário | Acessada a partir da tela principal ou do detalhe da viagem. |
+| Mapa da Viagem | Pilha de navegação | Exibe as coordenadas da viagem selecionada em um mapa. |
+| Convites | Lista ou seção dentro de Viagens Acompanhadas | Exibe convites pendentes, aceitos e rejeitados. |
+| Perfil do Usuário | Pilha de navegação ou menu superior | Permite visualizar e alterar dados cadastrais. |
+| Configurações | Pilha de navegação ou menu superior | Permite acessar preferências, logout e informações do app. |
+
+#### Fluxo Inicial do Aplicativo
+
+Ao abrir o aplicativo, o sistema deve verificar se existe uma sessão válida salva localmente.
+
+- Se existir sessão válida, o usuário deve ser direcionado para a tela principal.
+- Se não existir sessão válida, o usuário deve ser direcionado para a tela de login.
+- Durante o carregamento inicial, o app deve sincronizar as viagens do usuário e viagens acompanhadas, quando houver conexão com a internet.
+- Caso não haja conexão, o app deve exibir os dados salvos localmente, quando disponíveis.
+
+#### Fluxo de Minhas Viagens
+
+Na aba **Minhas Viagens**, o usuário deve conseguir:
+
+- Visualizar suas viagens cadastradas.
+- Filtrar viagens por status.
+- Criar uma nova viagem.
+- Acessar os detalhes de uma viagem.
+- Alterar informações de uma viagem.
+- Ativar uma viagem.
+- Inativar ou finalizar uma viagem ativa.
+- Cancelar uma viagem.
+- Excluir uma viagem permitida.
+- Convidar outro usuário para acompanhar a viagem.
+- Acessar o mapa da viagem.
+
+#### Fluxo de Viagens Acompanhadas
+
+Na aba **Viagens Acompanhadas**, o usuário deve conseguir:
+
+- Visualizar viagens aceitas para acompanhamento.
+- Visualizar convites pendentes.
+- Filtrar viagens acompanhadas por status.
+- Aceitar ou rejeitar convites.
+- Remover uma viagem da lista de acompanhamento.
+- Acessar o mapa de uma viagem aceita.
+- Atualizar as coordenadas exibidas no mapa.
+
+#### Uso de Modais e Confirmações
+
+Ações sensíveis devem utilizar modal ou diálogo de confirmação antes de serem executadas.
+
+Devem exigir confirmação:
+
+- Excluir viagem.
+- Cancelar viagem.
+- Inativar ou finalizar viagem ativa.
+- Rejeitar convite.
+- Remover viagem acompanhada.
+- Encerrar sessão do usuário.
+
+#### Navegação para Mapa
+
+A tela de mapa deve ser acessada a partir:
+
+- Do detalhe de uma viagem criada pelo usuário.
+- De uma viagem acompanhada aceita.
+- De uma ação direta na listagem, quando aplicável.
+
+O mapa deve permitir retorno simples para a tela anterior, mantendo o contexto da viagem selecionada.
+
+---
+
 ### 7.4 Padrões de Interação
+
 <!-- Convenções nativas da plataforma a seguir: gestos, haptics, transições. -->
+
+O aplicativo deve seguir padrões de interação nativos do Android, garantindo uma experiência familiar, previsível e fácil de usar. As interações devem priorizar clareza, segurança e baixo esforço do usuário.
+
+#### Interações Gerais
+
+| Padrão | Aplicação |
+|--------|-----------|
+| Toque simples | Deve ser usado para selecionar viagens, abrir detalhes, acionar botões e executar ações principais. |
+| Toque longo | Pode ser usado para exibir opções contextuais, quando necessário, mas não deve ser a única forma de acessar ações importantes. |
+| Pull to refresh | Deve ser usado para atualizar listas de viagens, convites e coordenadas do mapa quando aplicável. |
+| Swipe | Pode ser usado para alternar entre abas, desde que também exista navegação visível por Tab Pages. |
+| Botão voltar do Android | Deve retornar para a tela anterior respeitando a pilha de navegação. |
+| Confirmação por modal | Deve ser usada para ações sensíveis ou destrutivas. |
+
+#### Feedback Visual
+
+O aplicativo deve fornecer feedback visual claro para todas as ações relevantes.
+
+Exemplos:
+
+- Exibir indicador de carregamento durante login, cadastro, sincronização, envio de convite e carregamento do mapa.
+- Exibir mensagem de sucesso após criar viagem, alterar dados, aceitar convite ou finalizar viagem.
+- Exibir mensagem de erro quando uma operação falhar.
+- Destacar visualmente viagens ativas.
+- Indicar quando a localização está sendo capturada e compartilhada.
+- Indicar quando existem coordenadas pendentes de envio.
+- Indicar quando o app está sem conexão com a internet.
+
+#### Feedback Tátil
+
+Quando disponível no dispositivo, o app pode utilizar feedback tátil discreto em ações importantes.
+
+Exemplos:
+
+- Confirmação de ativação de viagem.
+- Confirmação de finalização de viagem.
+- Aceite ou rejeição de convite.
+- Erros de validação em formulários.
+- Ações destrutivas confirmadas.
+
+O feedback tátil não deve ser excessivo nem substituir mensagens visuais.
+
+#### Formulários
+
+Os formulários devem seguir padrões nativos de entrada de dados no Android.
+
+Devem ser aplicados os seguintes padrões:
+
+- Campos obrigatórios devem ser identificados claramente.
+- Erros de validação devem ser exibidos próximos ao campo correspondente.
+- O teclado exibido deve ser adequado ao tipo de campo, como e-mail, senha, texto ou número.
+- Campos de senha devem permitir exibir ou ocultar o conteúdo.
+- Ações de salvar devem permanecer visíveis ou facilmente acessíveis.
+- O usuário deve receber confirmação após salvar alterações.
+
+#### Listas e Filtros
+
+As listas de viagens e convites devem ser simples e objetivas.
+
+Cada item da lista deve exibir, quando aplicável:
+
+- Nome ou título da viagem.
+- Status da viagem.
+- Data de início.
+- Última atualização.
+- Indicação visual se a viagem está ativa.
+- Indicação visual se existe convite pendente.
+
+Os filtros devem permitir seleção clara por status e devem possuir opção para limpar o filtro aplicado.
+
+#### Mapa
+
+A tela de mapa deve seguir interações comuns de mapas em dispositivos móveis.
+
+O usuário deve conseguir:
+
+- Mover o mapa com gesto de arrastar.
+- Aproximar e afastar com gesto de pinça.
+- Visualizar os pontos registrados da viagem.
+- Identificar a última localização conhecida.
+- Atualizar manualmente as coordenadas, quando aplicável.
+- Retornar para a tela anterior sem perder o contexto da viagem.
+
+#### Estados de Tela
+
+As telas devem prever estados claros para diferentes situações.
+
+| Estado | Comportamento Esperado |
+|--------|------------------------|
+| Carregando | Exibir indicador visual de carregamento. |
+| Sem dados | Exibir mensagem explicando que não existem registros disponíveis. |
+| Sem conexão | Exibir aviso de falta de internet e permitir uso de dados locais quando disponíveis. |
+| Erro | Exibir mensagem clara e, quando possível, opção para tentar novamente. |
+| Sucesso | Exibir confirmação visual da ação realizada. |
+| Sincronização pendente | Indicar que existem dados locais aguardando envio para a API. |
+
+#### Transições
+
+As transições entre telas devem ser suaves e consistentes com o padrão Android.
+
+Recomendações:
+
+- Usar transições simples entre listas, detalhes e mapa.
+- Evitar animações longas ou excessivas.
+- Manter o usuário orientado sobre onde está e como retornar.
+- Preservar o contexto ao voltar de uma tela de detalhe para a listagem.
+
+#### Ações Destrutivas
+
+Ações destrutivas ou irreversíveis devem ser tratadas com cuidado.
+
+Exemplos:
+
+- Excluir viagem.
+- Cancelar viagem.
+- Rejeitar convite.
+- Remover viagem acompanhada.
+- Encerrar sessão.
+
+Essas ações devem:
+
+- Exibir confirmação antes da execução.
+- Informar claramente a consequência da ação.
+- Diferenciar visualmente ações destrutivas das ações principais.
+- Exibir retorno após a conclusão.
 
 ---
 
