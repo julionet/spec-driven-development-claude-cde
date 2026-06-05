@@ -36,7 +36,7 @@ Dessa forma, o produto representa uma oportunidade de criar uma solução útil 
 
 | # | Objetivo | Métrica de Sucesso | Meta |
 |---|----------|--------------------|------|
-| 1 | | | |
+| 1 | Permitir que o viajante registre uma viagem no aplicativo | Viagem criada com dados básicos, como título, data de início, tipo de transporte e status | |
 | 2 | Permitir que a localização do dispositivo seja capturada e enviada para um endpoint durante a viagem | Coordenadas de latitude, longitude, data e hora enviadas corretamente para a API | O aplicativo deve enviar pontos de localização enquanto a viagem estiver ativa |
 | 3 | Permitir que o viajante convide outras pessoas para acompanhar uma viagem | Convite criado e associado à viagem e ao usuário convidado | O usuário deve conseguir enviar convites para rastreamento de uma viagem |
 | 4 | Permitir que o usuário convidado aceite ou rejeite o convite de rastreamento | Status do convite atualizado para aceito ou rejeitado | O convidado deve conseguir responder ao convite dentro do aplicativo |
