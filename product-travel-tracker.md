@@ -678,16 +678,112 @@ Os KPIs mais importantes para validar o sucesso do produto nesta primeira versã
 Como o produto ainda não possui linha de base, os primeiros indicadores deverão servir também para aprendizado e ajuste das metas futuras. Após as primeiras semanas de uso, as metas poderão ser revisadas com base no comportamento real dos usuários.
 
 ## 10. Monetização e Modelo de Negócio
+
 <!-- Precificação, posicionamento de paywall, camadas gratuita vs. paga — decisões de produto apenas. -->
 
----
+Nesta versão, o aplicativo será disponibilizado de forma gratuita, sem anúncios, sem compras internas e sem cobrança por funcionalidades. O objetivo principal é validar o produto, permitir o uso próprio e disponibilizar a solução para outras pessoas interessadas em registrar e acompanhar viagens.
+
+| Item | Decisão |
+|------|---------|
+| Modelo de monetização | Gratuito |
+| Anúncios | Não haverá anúncios nesta versão |
+| Compras internas | Não haverá compras internas nesta versão |
+| Assinatura | Não haverá plano de assinatura nesta versão |
+| Paywall | Não haverá bloqueio de funcionalidades por pagamento |
+| Público-alvo inicial | Usuários que desejam registrar viagens e compartilhar localização com pessoas convidadas |
+| Objetivo de negócio inicial | Validar o uso do produto, a utilidade do rastreamento e o interesse de outros usuários |
+
+### 10.1 Camada Gratuita
+
+Todas as funcionalidades previstas para a primeira versão estarão disponíveis gratuitamente para os usuários.
+
+Funcionalidades incluídas:
+
+- Cadastro de usuário.
+- Login e recuperação de senha.
+- Cadastro de viagens.
+- Alteração, exclusão, ativação, inativação e cancelamento de viagens.
+- Envio de convites para acompanhamento.
+- Aceite ou rejeição de convites.
+- Acompanhamento de viagens em mapa.
+- Captura local de coordenadas.
+- Envio de coordenadas para a API.
+- Visualização de viagens próprias e viagens acompanhadas.
+
+### 10.2 Estratégia Inicial
+
+A estratégia inicial do produto será focada em adoção, aprendizado e validação. Como o aplicativo não terá cobrança nesta versão, o sucesso será medido principalmente pelo uso real das funcionalidades principais, como criação de viagens, ativação do rastreamento, envio de convites e acompanhamento pelo mapa.
+
+### 10.3 Possibilidades Futuras
+
+Embora a primeira versão seja totalmente gratuita, futuras versões poderão avaliar modelos de monetização, caso exista demanda e crescimento de uso.
+
+Possibilidades futuras, fora do escopo desta versão:
+
+- Plano premium para histórico avançado de viagens.
+- Compartilhamento público de rotas.
+- Exportação de trajetos.
+- Relatórios detalhados de viagem.
+- Armazenamento ampliado de histórico.
+- Recursos para grupos, motoclubes ou equipes.
+- Integração com redes sociais.
+
+Essas possibilidades não fazem parte da versão atual e deverão ser avaliadas somente após validação do produto e entendimento do comportamento dos usuários.
 
 ## 11. Riscos e Premissas
 
 | # | Tipo | Descrição | Mitigação |
 |---|------|-----------|-----------|
-| R-01 | Premissa sobre usuário | Usuários irão [comportamento]. | Validar por meio de [método]. |
-| R-02 | Risco de mercado |  |  |
+| R-01 | Premissa sobre usuário | Usuários viajantes terão interesse em registrar viagens e compartilhar sua localização com pessoas convidadas. | Validar com uso próprio, testes com usuários próximos e acompanhamento dos eventos de criação, ativação e finalização de viagens. |
+| R-02 | Premissa sobre usuário | Familiares, amigos ou convidados terão interesse em acompanhar viagens pelo mapa dentro do aplicativo. | Validar pela taxa de aceite de convites, abertura do mapa e frequência de atualização das viagens acompanhadas. |
+| R-03 | Premissa sobre usuário | Os usuários aceitarão conceder permissão de localização para que o app registre as coordenadas durante uma viagem ativa. | Explicar claramente o motivo da permissão e rastrear a taxa de permissão concedida ou negada. |
+| R-04 | Premissa técnica | O dispositivo Android conseguirá capturar coordenadas a cada 10 segundos durante uma viagem ativa com precisão suficiente. | Testar em diferentes dispositivos Android, versões do sistema, condições de sinal GPS e cenários de deslocamento. |
+| R-05 | Premissa técnica | A estratégia de salvar coordenadas localmente e enviar para a API a cada 1 minuto será suficiente para manter o acompanhamento útil. | Validar em testes reais de viagem e ajustar a frequência de captura ou envio caso necessário. |
+| R-06 | Risco de conectividade | Durante viagens, o usuário pode passar por áreas sem internet, impedindo o envio imediato das coordenadas. | Salvar coordenadas localmente, manter fila de sincronização e enviar os dados automaticamente quando houver conexão. |
+| R-07 | Risco de sincronização | Coordenadas podem não ser enviadas corretamente para a API, gerando atraso ou perda no acompanhamento da viagem. | Manter registros pendentes na base local até confirmação de envio bem-sucedido e permitir nova tentativa automática. |
+| R-08 | Risco de duplicidade | Coordenadas podem ser enviadas mais de uma vez em caso de falha parcial ou resposta inconsistente da API. | Definir identificador único para cada coordenada e garantir controle de sincronização para evitar duplicidade no servidor. |
+| R-09 | Risco de perda de dados | Coordenadas salvas localmente podem ser perdidas se o app for desinstalado, tiver dados apagados ou ocorrer falha local. | Informar que dados pendentes dependem da base local e priorizar sincronização sempre que houver internet. |
+| R-10 | Risco de bateria | A captura de localização a cada 10 segundos pode aumentar o consumo de bateria durante viagens longas. | Monitorar consumo em testes reais, informar ao usuário quando a viagem estiver ativa e avaliar otimizações futuras. |
+| R-11 | Risco de permissão | O usuário pode negar a permissão de localização, impedindo a funcionalidade principal de rastreamento. | Exibir mensagem clara explicando que a localização é necessária apenas durante viagens ativas. |
+| R-12 | Risco de privacidade | Usuários podem se preocupar com o compartilhamento da localização em tempo real ou com acesso indevido aos dados da viagem. | Compartilhar localização apenas com viagem ativa, usuário autenticado e convidados autorizados; deixar claro quando o rastreamento estiver ativo. |
+| R-13 | Risco de segurança | Pessoas não autorizadas podem tentar acessar coordenadas ou viagens de outros usuários. | Exigir autenticação, validar permissões no backend e permitir acesso apenas ao viajante e convidados autorizados. |
+| R-14 | Risco de usabilidade | Usuários podem não entender a diferença entre viagem cadastrada, ativa, finalizada, cancelada ou acompanhada. | Utilizar textos claros, status visuais, filtros e mensagens explicativas em cada ação importante. |
+| R-15 | Risco de adoção | O aplicativo pode ter baixa adesão se o fluxo de cadastro, convite ou aceite for considerado complexo. | Simplificar o onboarding, reduzir etapas obrigatórias e medir abandono nos fluxos principais. |
+| R-16 | Risco de acompanhamento | Convidados podem não acompanhar a viagem se precisarem instalar o app e criar conta antes de aceitar o convite. | Avaliar futuramente fluxo simplificado de convite, mas manter autenticação na primeira versão por segurança. |
+| R-17 | Risco de precisão | O GPS pode registrar coordenadas imprecisas em áreas urbanas, túneis, serras, áreas fechadas ou locais com baixa visibilidade de satélite. | Exibir última localização registrada e horário da atualização, evitando comunicar precisão absoluta. |
+| R-18 | Risco de experiência offline | O usuário pode esperar que o acompanhamento funcione totalmente offline, mesmo sem envio para a API. | Deixar claro que dados locais podem ser visualizados, mas o acompanhamento por convidados depende de sincronização com internet. |
+| R-19 | Risco operacional | A API pode ficar indisponível e impedir login, sincronização, convites ou atualização do mapa. | Exibir mensagens amigáveis, manter dados locais quando possível e permitir nova tentativa quando a API voltar. |
+| R-20 | Risco de escala | O volume de coordenadas pode crescer rapidamente em viagens longas ou com muitos usuários ativos. | Monitorar volume de dados, taxa de envio e armazenamento; avaliar políticas futuras de retenção e compactação de histórico. |
+| R-21 | Risco legal/LGPD | Dados de localização são sensíveis e podem exigir cuidado adicional com consentimento, finalidade e controle de acesso. | Informar finalidade do uso da localização, restringir acesso por autorização e prever termos de uso e política de privacidade. |
+| R-22 | Premissa de produto | A primeira versão gratuita, sem anúncios e sem compras internas, será suficiente para validar interesse e utilidade do produto. | Acompanhar KPIs de uso, retenção, convites aceitos e viagens ativadas antes de avaliar monetização futura. |
+| R-23 | Premissa de plataforma | Desenvolver apenas para Android atenderá ao público inicial do produto. | Validar perfil dos usuários interessados e avaliar versão iOS somente após validação da primeira versão. |
+| R-24 | Risco de manutenção | O app pode exigir ajustes frequentes por mudanças de permissões, políticas de background location ou versões do Android. | Considerar essas limitações na especificação técnica e testar em versões Android suportadas. |
+| R-25 | Risco de notificação | Usuários podem não perceber convites recebidos ou mudanças importantes no status da viagem. | Avaliar uso de notificações em versão futura ou destacar convites pendentes na tela principal. |
+
+---
+
+### Principais Premissas
+
+- O usuário viajante deseja compartilhar sua localização de forma controlada durante uma viagem.
+- O usuário convidado aceita acompanhar uma viagem dentro do aplicativo.
+- A autenticação é necessária para garantir segurança e controle de acesso.
+- A localização só deve ser capturada e enviada quando houver uma viagem ativa.
+- A base local será suficiente para armazenar coordenadas pendentes até a sincronização.
+- A conexão com a internet pode falhar durante viagens, por isso o app precisa funcionar parcialmente offline.
+- O desenvolvimento inicial apenas para Android é suficiente para validar o produto.
+- O modelo gratuito será adequado para a primeira versão.
+
+### Principais Riscos
+
+- Negação da permissão de localização.
+- Consumo elevado de bateria.
+- Falhas de conexão durante viagens.
+- Atrasos na sincronização das coordenadas.
+- Baixa adesão de convidados por necessidade de cadastro.
+- Dificuldade de entendimento dos status da viagem.
+- Preocupações com privacidade e segurança dos dados de localização.
+- Dependência da disponibilidade da API.
+- Crescimento do volume de coordenadas armazenadas e sincronizadas.
 
 ---
 
@@ -696,7 +792,6 @@ Como o produto ainda não possui linha de base, os primeiros indicadores deverã
 
 | # | Pergunta | Responsável | Prazo |
 |---|----------|-------------|-------|
-| Q-01 |  |  |  |
 
 ---
 
@@ -704,5 +799,5 @@ Como o produto ainda não possui linha de base, os primeiros indicadores deverã
 
 | Versão | Data | Autor | Resumo |
 |--------|------|-------|--------|
-| 0.1.0 | AAAA-MM-DD | [Nome] | Rascunho inicial |
+| 0.1.0 | 2026-06-04 | Jose Julio | Rascunho inicial |
 
