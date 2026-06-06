@@ -13,7 +13,6 @@
 
 ### 1.1 Declaração do Problema
 <!-- Descreva o problema que este produto/funcionalidade resolve. Responda: qual é a dor existente hoje? Para quem? -->
-1.1 Declaração do Problema
 
 Atualmente, viajantes que realizam trajetos de bike, moto, carro ou ônibus muitas vezes precisam compartilhar sua localização manualmente com familiares, amigos ou pessoas próximas durante a viagem. Esse processo pode ser pouco prático, inseguro e fragmentado, principalmente em viagens longas, onde há mudanças constantes de localização e nem sempre é possível enviar atualizações frequentes.
 
@@ -23,7 +22,6 @@ O produto resolve esse problema ao permitir que o viajante compartilhe sua local
 
 ### 1.2 Oportunidade
 <!-- Por que agora? Qual mudança de mercado, usuário ou negócio torna este o momento certo? -->
-1.2 Oportunidade
 
 O momento é oportuno para o desenvolvimento deste produto devido à crescente necessidade de compartilhar informações de localização de forma simples, prática e segura durante viagens. Cada vez mais pessoas realizam trajetos de bike, moto, carro ou ônibus e desejam manter familiares, amigos ou pessoas próximas informadas sobre seu deslocamento.
 
@@ -301,11 +299,26 @@ O compartilhamento de localização deverá ocorrer somente quando o usuário es
    O aplicativo deve considerar que o usuário pode estar em deslocamento, portanto as principais ações devem exigir poucos toques e ser fáceis de identificar rapidamente.
 
 ### 7.2 Telas / Views Principais
+
 <!-- Liste as telas principais; anexe wireframes ou links do Figma. Sem código de layout. -->
 
 | Tela | Descrição | Link Figma / Wireframe |
 |------|-----------|------------------------|
-| Home |           |                        |
+| Splash | Tela inicial exibida ao abrir o aplicativo, enquanto o app realiza o carregamento inicial e verifica se existe uma sessão válida do usuário. | A definir |
+| Login | Tela para autenticação do usuário por e-mail e senha. Deve permitir acesso ao cadastro de usuário e recuperação de senha. | A definir |
+| Cadastrar Usuário | Tela para criação de uma nova conta no aplicativo, com dados básicos do usuário e definição de senha. | A definir |
+| Recuperar Senha | Tela onde o usuário informa seu e-mail para receber um token de recuperação de senha. | A definir |
+| Nova Senha | Tela onde o usuário informa o token recebido e cadastra uma nova senha de acesso. | A definir |
+| Principal | Tela principal do aplicativo após o login. Deve exibir as opções **Minhas Viagens** e **Viagens Acompanhadas** em abas distintas. | A definir |
+| Minhas Viagens | Aba ou seção da tela principal que lista as viagens cadastradas pelo usuário logado, com opção de filtro por status e acesso às ações da viagem. | A definir |
+| Viagens Acompanhadas | Aba ou seção da tela principal que lista viagens que o usuário acompanha, convites pendentes e opções para aceitar ou rejeitar convites. | A definir |
+| Detalhe da Viagem | Tela para visualizar informações completas de uma viagem, seu status, ações disponíveis e acesso ao mapa. | A definir |
+| Cadastrar Viagem | Tela para criar uma nova viagem, informando os dados necessários para seu registro. | A definir |
+| Alterar Dados da Viagem | Tela para editar informações de uma viagem cadastrada, desde que seu status permita alteração. | A definir |
+| Mapa | Tela para visualizar as coordenadas registradas de uma viagem em um mapa, destacando os pontos do trajeto e a última localização conhecida. | A definir |
+| Alterar Dados do Usuário | Tela para o usuário visualizar e atualizar seus dados cadastrais após estar logado. | A definir |
+
+---
 
 ### 7.3 Modelo de Navegação
 
