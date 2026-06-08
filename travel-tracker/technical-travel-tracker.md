@@ -155,9 +155,11 @@ A estrutura recomendada é:
 
 | Biblioteca | Versão | Finalidade | Licença |
 |------------|--------|------------|---------|
-| WorkManager | A definir | Execução de tarefas periódicas ou agendadas, como sincronização de coordenadas. | Apache 2.0 |
+| WorkManager | A definir | Execução de tarefas agendadas complementares, como reprocessamento de coordenadas pendentes após reconexão com a internet. Não deve ser usado para captura ou envio de coordenadas nos intervalos de 10 e 60 segundos, pois o intervalo mínimo do `PeriodicWorkRequest` é de 15 minutos. | Apache 2.0 |
 | MapLibre Native Android | A definir | Exibição de mapa no aplicativo, marcadores, pontos e trajetos da viagem. | BSD 2-Clause |
 | OpenStreetMap | Não aplicável | Fonte gratuita de dados cartográficos para exibição de mapas. | ODbL |
+
+> **Componente obrigatório — Foreground Service (nativo Android):** A captura de coordenadas a cada 10 segundos e o envio ao endpoint a cada 60 segundos devem ser implementados por meio de um **Foreground Service** com `foregroundServiceType="location"`. Esse é o único mecanismo do Android que garante execução contínua em background com o app fechado ou em segundo plano, dentro das restrições da plataforma. O serviço deve exibir uma notificação persistente enquanto estiver ativo, conforme exigido pelo Android. Deve ser iniciado ao ativar a viagem e encerrado ao inativar, finalizar ou cancelar.
 
 ---
 
@@ -196,8 +198,8 @@ Não recomendo usar **osmdroid** como primeira opção neste projeto, porque o r
 | FEAT-10 | Ativação de viagem | Implementar ativação de uma viagem, alteração do status para `ativa`, salvamento da viagem ativa em cache local e início da captura de coordenadas. | [FEATURE-trip-activate.md](./features/FEATURE-trip-activate.md) |
 | FEAT-11 | Inativação / pausa da viagem | Implementar inativação de viagem ativa, confirmação da ação, alteração do status para `inativa` e interrupção da captura de novas coordenadas. | [FEATURE-trip-inactivate.md](./features/FEATURE-trip-inactivate.md) |
 | FEAT-12 | Cancelamento de viagem | Implementar cancelamento de viagem, confirmação da ação, alteração do status para `cancelada`, interrupção da captura de coordenadas quando aplicável e atualização da lista. | [FEATURE-trip-cancel.md](./features/FEATURE-trip-cancel.md) |
-| FEAT-13 | Captura local de coordenadas | Implementar captura de localização durante viagem ativa, salvando localmente uma coordenada a cada 10 segundos com `coordenadaID`, `viagemID`, data/hora, latitude, longitude e altitude. | [FEATURE-location-capture.md](./features/FEATURE-location-capture.md) |
-| FEAT-14 | Sincronização de coordenadas | Implementar envio das coordenadas pendentes para API a cada 60 segundos quando houver internet, remoção local após sucesso e manutenção local em caso de falha. | [FEATURE-location-sync.md](./features/FEATURE-location-sync.md) |
+| FEAT-13 | Captura local de coordenadas | Implementar captura de localização durante viagem ativa por meio de um Foreground Service com `foregroundServiceType="location"`, salvando localmente uma coordenada a cada 10 segundos com `coordenadaID`, `viagemID`, data/hora, latitude, longitude e altitude. O serviço deve continuar em execução mesmo com o aplicativo fechado ou em segundo plano, enquanto a viagem permanecer ativa. | [FEATURE-location-capture.md](./features/FEATURE-location-capture.md) |
+| FEAT-14 | Sincronização de coordenadas | Implementar envio das coordenadas pendentes para API a cada 60 segundos quando houver internet, dentro do mesmo Foreground Service responsável pela captura, garantindo execução contínua independente do estado do app. Remover localmente após envio com sucesso e manter em caso de falha. | [FEATURE-location-sync.md](./features/FEATURE-location-sync.md) |
 | FEAT-15 | Convites de acompanhamento | Implementar envio de convite por e-mail para acompanhamento de viagem, validação dos e-mails, envio para API e exibição de sucesso ou falha. | [FEATURE-trip-invitations.md](./features/FEATURE-trip-invitations.md) |
 | FEAT-16 | Viagens acompanhadas | Implementar listagem das viagens acompanhadas, convites pendentes, filtro por status, visualização somente leitura dos dados da viagem e persistência local temporária. | [FEATURE-followed-trips.md](./features/FEATURE-followed-trips.md) |
 | FEAT-17 | Aceite e rejeição de convites | Implementar aceite e rejeição de convites recebidos, confirmação quando necessário, envio da resposta para API e atualização da lista de viagens acompanhadas. | [FEATURE-invitation-response.md](./features/FEATURE-invitation-response.md) |
@@ -905,7 +907,7 @@ A interface deve apenas observar o estado exposto pelo `ViewModel` e enviar even
 | Estado de sessão | Escopo global do app | SessionManager / AuthRepository |
 | Estado da viagem ativa | Escopo global do usuário logado | ActiveTripManager / TripRepository |
 | Estado de conectividade | Escopo global do app | ConnectivityObserver |
-| Estado de sincronização | Escopo de background/sincronização | LocationSyncManager / WorkManager |
+| Estado de sincronização | Escopo de background/sincronização | LocationSyncManager / Foreground Service |
 | Estado persistido local | Base local temporária | Room / Repositories |
 | Dados sensíveis de sessão | Armazenamento seguro | EncryptedSharedPreferences / SessionManager |
 | Preferências não sensíveis | Escopo do app ou usuário | DataStore |
@@ -1045,7 +1047,8 @@ Após envio bem-sucedido, as coordenadas enviadas devem ser removidas do armazen
 | Android | StateFlow | Exposição de estado contínuo das telas a partir dos ViewModels. |
 | Android | SharedFlow | Emissão de eventos únicos, como mensagens, navegação, abertura de modal e confirmação de ações. |
 | Android | Flow | Observação de dados locais vindos do Room, DataStore, sessão e conectividade. |
-| Android | WorkManager | Execução de tarefas de sincronização em segundo plano, quando aplicável. |
+| Android | Foreground Service | Execução contínua da captura de coordenadas (a cada 10 segundos) e do envio ao endpoint (a cada 60 segundos) em segundo plano, inclusive com o app fechado. É o mecanismo principal para manter o rastreamento ativo durante uma viagem. Deve ser iniciado ao ativar a viagem e encerrado ao inativar, finalizar ou cancelar. |
+| Android | WorkManager | Execução de tarefas agendadas complementares que tolerem latência maior, como reprocessamento de falhas de envio após reconexão. Não usar para os intervalos de 10 e 60 segundos, pois o intervalo mínimo do `PeriodicWorkRequest` é de 15 minutos. |
 | Android | DataStore Flow | Observação de preferências não sensíveis do usuário. |
 | Android | Room Flow | Observação reativa de dados locais, como viagens, viagens acompanhadas e coordenadas pendentes. |
 | Android | LiveData | Evitar em novas features, exceto se houver necessidade de compatibilidade com código legado. |
@@ -1143,6 +1146,8 @@ Exemplos de eventos únicos:
 | Privacidade de localização | O usuário deve conseguir interromper o rastreamento. | Parar captura de coordenadas ao inativar, finalizar ou cancelar uma viagem. |
 | Permissões | A permissão de localização deve ser solicitada de forma contextualizada. | Solicitar permissão apenas quando o usuário iniciar ou ativar uma viagem. |
 | Permissões | O app deve tratar permissão de localização negada. | Exibir mensagem orientativa e impedir ativação do rastreamento quando a permissão for necessária. |
+| Permissões | O app deve solicitar a permissão `ACCESS_BACKGROUND_LOCATION` para capturar localização com o app em segundo plano ou fechado (obrigatória no Android 10+ / API 29+). | Solicitar após concessão da permissão de localização em foreground, com explicação clara de que é necessária para continuar o rastreamento com o app fechado. Esta permissão exige revisão manual pela Google Play antes da publicação. |
+| Permissões | O app deve declarar a permissão `FOREGROUND_SERVICE_LOCATION` para executar o Foreground Service do tipo location (obrigatória a partir do Android 14 / API 34). | Declarar no manifesto. Sem esta permissão, o sistema rejeita a criação do serviço em dispositivos com API 34 ou superior. |
 | Logs | Logs não devem conter dados sensíveis ou localização detalhada. | Evitar registrar tokens, senha, coordenadas, e-mail completo ou payloads sensíveis. |
 | Senhas | O app deve validar regras mínimas de senha. | Exigir no mínimo 6 caracteres, uma letra maiúscula, uma letra minúscula, um número e um caractere especial. |
 | Recuperação de senha | O token de recuperação deve ser validado antes da alteração da senha. | Comparar o token informado com o token recebido para validação antes de permitir nova senha. |
