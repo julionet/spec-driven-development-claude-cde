@@ -1,7 +1,7 @@
 # Especificação de Produto
 
 > **Tipo de documento:** Spec de Produto  
-> **Status:** `rascunho`
+> **Status:** `revisado`
 > **Versão:** 0.1.0  
 > **Última atualização:** 2026-06-04  
 > **Product Owner:** Jose Julio  

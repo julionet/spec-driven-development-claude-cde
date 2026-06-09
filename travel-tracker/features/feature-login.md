@@ -594,23 +594,17 @@ A feature de login deve depender de componentes compartilhados do app, como:
 
 ```json
 {
-  "userId": "b37f7d9e-58e6-4c9e-9c5b-0f1f0c9e7a11",
-  "name": "José Eduardo",
-  "email": "usuario@gmail.com",
-  "accessToken": "access-token",
-  "refreshToken": "refresh-token",
-  "expiresIn": 3600
+  "access_token": "string",
+  "refresh_token": "string",
+  "token_type": "bearer"
 }
 ```
 
 | Campo          | Tipo          | Obrigatório | Descrição                                       |
 | -------------- | ------------- | ----------- | ----------------------------------------------- |
-| `userId`       | UUID / String | Sim         | Identificador do usuário autenticado.           |
-| `name`         | String        | Sim         | Nome do usuário autenticado.                    |
-| `email`        | String        | Sim         | E-mail do usuário autenticado.                  |
 | `accessToken`  | String        | Sim         | Token de acesso para requisições autenticadas.  |
 | `refreshToken` | String        | Sim         | Token usado para renovação da sessão.           |
-| `expiresIn`    | Number        | Sim         | Tempo de expiração do access token em segundos. |
+| `token_type`   | String        | Sim         | Valor fixo `bearer`. |
 
 ---
 
@@ -707,12 +701,6 @@ A feature de login deve depender de componentes compartilhados do app, como:
 
 | Permissão | Obrigatória | Quando solicitada | Se negada |
 |-----------|-------------|-------------------|-----------|
-| [ex.: Câmera] | [Obrigatória / Opcional] | [Primeiro uso / Sob demanda] | [Desabilitar feature / Exibir alternativa] |
-| [ex.: Notificações] | Opcional | Após primeiro sucesso | Feature continua funcionando; sem badge de notificação |
-
-**Dados armazenados localmente:** [Liste quaisquer dados pessoais ou sensíveis persistidos e o motivo.]  
-**Dados enviados ao servidor:** [Liste quais dados do usuário são transmitidos e a política de retenção.]  
-**Dados excluídos no logout:** [Sim / Não — quais campos.]
 
 ---
 
@@ -786,7 +774,7 @@ A feature de login deve depender de componentes compartilhados do app, como:
 
 ---
 
-## 11. Dependências e Bloqueios
+## 10. Dependências e Bloqueios
 
 | Dependência | Tipo | Responsável | Status | Bloqueante |
 |-------------|------|-------------|--------|------------|
@@ -794,14 +782,14 @@ A feature de login deve depender de componentes compartilhados do app, como:
 
 ---
 
-## 12. Questões em Aberto
+## 11. Questões em Aberto
 
 | # | Pergunta | Responsável | Prazo |
 |---|----------|-------------|-------|
 
 ---
 
-## 13. Histórico de Revisões
+## 12. Histórico de Revisões
 
 | Versão | Data | Autor | Resumo |
 |--------|------|-------|--------|
