@@ -430,8 +430,8 @@ Erros locais simples, como ausência de conexão sem sessão válida, podem dire
 │ │                                │ │
 │ │ Mensagem amigável do erro      │ │
 │ │                                │ │
-│ │ Botão: "Tentar novamente"     │ │
-│ │ Botão: "Ir para login"        │ │
+│ │ Botão: "Tentar novamente"      │ │
+│ │ Botão: "Ir para login"         │ │
 │ └────────────────────────────────┘ │
 └────────────────────────────────────┘
 ```
@@ -735,11 +735,9 @@ Essa feature deve depender de componentes compartilhados do app, como:
 |------|----------|-------------------|--------|
 | `accessToken` | Sim | Armazenamento seguro, como `EncryptedSharedPreferences` | Manter o usuário autenticado e permitir chamadas autenticadas à API. |
 | `refreshToken` | Sim | Armazenamento seguro, como `EncryptedSharedPreferences` | Permitir renovação da sessão quando aplicável. |
-| `usuarioId` | Sim | Armazenamento seguro e/ou base local vinculado ao usuário logado | Associar dados locais ao usuário autenticado. |
-| Dados mínimos do usuário | Sim | Base local temporária ou armazenamento seguro, conforme necessidade | Exibir informações do usuário e manter contexto da sessão. |
 | Minhas viagens | Sim | Room / base local temporária | Permitir carregamento rápido e visualização offline parcial. |
 | Viagens acompanhadas | Sim | Room / base local temporária | Permitir carregamento rápido e visualização offline parcial. |
-| Viagem ativa atual | Sim | Room ou DataStore, vinculada ao usuário logado | Permitir que o app saiba qual viagem está em andamento. |
+| Viagem ativa atual | Sim | DataStore, vinculada ao usuário logado | Permitir que o app saiba qual viagem está em andamento. |
 | Coordenadas pendentes | Sim | Room / base local temporária | Manter coordenadas capturadas até o envio bem-sucedido para a API. |
 | Preferências não sensíveis | Não | DataStore | Guardar configurações simples, como última aba acessada ou preferências visuais. |
 
