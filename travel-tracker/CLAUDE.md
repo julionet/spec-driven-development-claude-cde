@@ -12,9 +12,13 @@ This is a **spec-driven development** documentation repository for a travel trac
 |------|---------|
 | `product-travel-tracker.md` | Product spec: user stories (US-01–US-18), functional requirements (RF-01–RF-79), UX principles, copy strings, analytics events |
 | `technical-travel-tracker.md` | Technical spec: architecture, API contracts, data models, state management, security, analytics schema, release strategy |
-| `features/feature-login.md` | Feature spec template (partially filled) for login — serves as the template for all other feature specs |
+| `features/feature-splash.md` | FEAT-01: Splash — startup flow, session check, initial data load, permissions, coordinate sync |
+| `features/feature-login.md` | FEAT-01: Login — authentication, session storage, navigation to Home |
+| `features/feature-novo-usuario.md` | FEAT-02: User registration — form validation, `POST /auth/register`, redirect to login |
+| `features/feature-recuperar-senha.md` | FEAT-03: Password recovery — 3-screen flow (email → token → new password), `POST /auth/recover-password` + `POST /auth/update-password` |
+| `features/feature-tela-principal.md` | FEAT-04: Home screen — bottom nav, Minhas Viagens tab, Viagens Acompanhadas tab, invite accept/reject |
 
-New feature specs should be created under `features/` following the naming convention `FEATURE-[feature-name].md`, using the `feature-login.md` file as the template. The technical spec §4 lists all 23 planned features (FEAT-01 through FEAT-23) and the filename expected for each.
+New feature specs should be created under `features/` following the naming convention `feature-[feature-name].md`. Use any existing feature spec as the template. The technical spec §4 lists all 23 planned features (FEAT-01 through FEAT-23) and the expected filename for each.
 
 ## App Overview
 
@@ -80,6 +84,29 @@ Invite status: `pending` → `accepted` | `rejected`
 | `Core/Analytics` | Event tracking abstraction |
 | `DesignSystem` | Reusable Compose components, theme tokens |
 | `SharedDomain` | Shared entities, interfaces |
+
+Feature module paths established in the specs: `features/splash`, `features/auth/login`, `features/auth/recover-password`, `Features/CadastroUsuario`, `features/home`.
+
+## Cross-Cutting Patterns (established across all feature specs)
+
+### UI/State pattern per screen
+Each feature follows: `Screen` (Composable) + `ViewModel` + `UiState` (StateFlow) + `UiEvent` (SharedFlow, one-shot) + `Action` (user interactions dispatched to ViewModel).
+
+### Error display rules
+- **Validation errors** (local, pre-API): inline below the corresponding field
+- **API/endpoint errors**: always in a `StandardErrorBottomSheet` modal with title, friendly message, and at minimum an "Entendi" button; optionally a "Tentar novamente" button
+- Never expose HTTP codes, stack traces, or raw API payloads to the user
+
+### Token storage and security
+- `accessToken` and `refreshToken` stored exclusively in `EncryptedSharedPreferences`
+- Tokens are never logged, never sent in analytics events, never exposed in error messages
+- Token validated in Splash; silent refresh attempted before redirecting to login
+
+### Navigation flow
+Splash is always the entry point. It routes to Login (no valid session) or Home (valid session). Features use `SharedFlow` events to trigger navigation from ViewModel; the View observes and executes navigation — never navigates directly from domain or data layers.
+
+### Feature spec sections (template)
+All feature specs follow sections: 1 (Summary/Scope), 2 (User-visible behavior — entry points, happy path, alternatives, edge cases), 3 (UI spec — screens, layouts, states, messages, components), 4 (Technical design — module placement, component decomposition, data flow, endpoints, persistence, error handling, technical rules), 5 (Analytics events), 6 (Permissions/Privacy), 8 (Localization — `strings.xml` keys with pt-BR values), 9 (Definition of Done).
 
 ## Offline Behavior Rules
 
